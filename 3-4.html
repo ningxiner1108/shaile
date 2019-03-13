@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>计算属性、方法、监听器</title>
+	<script src="./vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<!-- 计算属性{{fullName}} -->
+		<!-- {{fullName()}} -->
+		{{fullName}}
+		{{age}}
+	</div>
+
+	<script>
+		var vm = new Vue({
+			el: "#app",
+			data: {
+				firstName:'Jack',
+				lastName:'LI',
+				age : 28,
+				fullName:'Jack LI'
+			},
+			//监听器和computed都基本缓存的机制
+			watch:{
+				firstName :function(){
+					console.log('计算了一次');
+					return this.fullName = this.firstName + ' ' + this.lastName;
+				},
+
+				lastName: function(){
+					console.log('计算了一次');
+					return this.fullName = this.firstName + ' ' + this.lastName;
+				}
+			},
+
+			// methods:{
+			// 	fullName: function(){
+			// 		console.log('计算了一次');
+			// 		return this.firstName + ' ' + this.lastName;
+			// 	}
+			// },
+
+			//计算属性,是内置缓存的,fullname这个是属性是通过计算得到的,当依赖的变量没有发生变化时，会用上次执行的缓存,性能更高，更简洁，优先推荐
+			// computed:{
+			// 	fullName:function(){
+			// 		console.log('计算了一次');
+			// 		return this.firstName + ' ' + this.lastName;
+			// 	}
+			// }
+		});
+	</script>
+</body>
+</html>
