@@ -1,0 +1,57 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue的列表渲染</title>
+	<script src="./vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<!-- <div v-for="item in list">{{item}}</div> -->
+		<!-- <div v-for="(item,index) of list" :key="item.id">{{item.text}}-{{index}}</div> -->
+		
+
+		<!-- template可以包裹一些元素，但是不会被渲染到页面上 -->
+		<!-- <template v-for="(item,index) of list" 
+			     :key="item.id">
+			<div>
+			 {{item.text}}-{{index}}
+			</div>
+			<span>
+			 {{item.id}}
+			</span>
+		</template> -->
+
+		<div v-for="(item,key,index) of userInfo">
+			{{item}}---{{key}}---{{index}}
+		</div>
+
+	</div>
+
+
+	<script>
+		//push pop shift unshift splice reverse sort
+		//vm.list.splice(1,1,{id:'1111',text:'qqqq'})
+		//动态给对象或者数组添加数据，不会立即在dom里显示，除非改变对象的引用，数据变化，页面也会变化
+		var vm = new Vue({
+			el: "#app",
+			data: {
+				list: [
+					{id: '1343353501','text': 'aaa'},
+					{id: '1343353502','text': 'bbb'},
+					{id: '1343353503','text': 'ccc'},
+				],
+				userInfo: {
+					name: 'mike',
+					age: 28,
+					gender: 'male',
+					salary: 'sacret'
+				}
+			}
+		});
+
+
+
+	</script>
+</body>
+</html>

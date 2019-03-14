@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue中的ref引用</title>
+	<script src="./vue.js"></script>
+</head>
+<body>
+	<!-- <div id="app">
+		<table>
+			<tbody> -->
+				<!-- 没有在tbody里面显示，而是在最外层div的下面 -->
+				<!-- <row></row>
+				<row></row>
+				<row></row> -->
+		<!-- 		<tr is="row"></tr>
+				<tr is="row"></tr>
+				<tr is="row"></tr>
+			</tbody>
+		</table>
+	</div> -->
+
+<!-- 	<div id="app">
+		<div ref="hello" @click="handleDivClick">hello world</div>
+	</div> -->
+
+	<div id="app">
+		<counter ref="one" @change="handleChange"></counter>
+		<counter ref="two" @change="handleChange"></counter>
+		<div>{{total}}</div>
+	</div>
+
+	<script>
+		//定义子组件的时候，data必须是一个函数，而不能是对象，返回值是对象.避免子组件之间相互影响
+		// Vue.component('row', {
+		// 	data: function(){
+		// 		return {
+		// 			content: "this is a row"
+		// 		}
+		// 	},
+		// 	template: "<tr><td>{{content}}</td></tr>"
+		// });
+
+
+		Vue.component('counter', {
+			template: "<div @click='handleNumberClick'>{{number}}</div>",
+			data: function(){
+				return {
+					number: 0
+				}
+			},
+			methods: {
+				handleNumberClick: function(){
+					this.number++;
+					//向外触发change事件，由父组件进行监听
+					this.$emit('change');
+				}
+			}
+		});
+
+
+
+		var vm = new Vue({
+			el: "#app",
+			data: {
+				total: 0
+			},
+			methods: {
+				handleDivClick: function(){
+					//在标签上设置ref,获取的是对应标签的dom元素
+					console.log(this.$refs.hello);//<div>hello world</div>
+					alert(this.$refs.hello.innerHTML);
+				},
+				handleChange: function(){
+					//在组件上设置ref，获取的是子组件的引用
+					this.total = this.$refs.one.number + this.$refs.two.number;
+				}
+			}
+		});
+	</script>
+</body>
+</html>

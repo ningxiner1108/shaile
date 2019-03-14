@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue的条件渲染</title>
+	<script src="./vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<!-- show为false的时候，不存在dom上，效率更低，需要不断重复建立删除dom -->
+		<!-- <div v-if="show" data-test="v-if">{{message}}</div> -->
+		<!-- show为false的时候，依然存在dom上，dom显示style="display:none",效率更高，不用重复的建立dom -->
+		<!-- <div v-show="show" data-test="v-show">{{message}}</div> -->
+
+		<!-- v-if,v-else必须连在一起使用 -->
+		<!-- <div v-if="show">{{message}}</div>
+		<div v-else>Bye Bye</div> -->
+
+		<!-- <div v-if="show === 'a'">this is A</div>
+		<div v-else-if="show === 'b'">this is B</div>
+		<div v-else>this is others</div> -->
+		
+		<!-- 当给某个元素标签加key属性的时候，表示是页面的唯一元素，如果key值不一样，vue不回去复用这个元素值 -->
+		<div v-if="show">邮箱：<input key="email"/></div>
+		<div v-else>用户名：<input key="username"/></div>
+
+
+	</div>
+
+	<script>
+		var vm = new Vue({
+			el: "#app",
+			data: {
+				message: "hello world",
+				show: false
+			}
+		});
+
+
+
+	</script>
+</body>
+</html>

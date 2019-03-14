@@ -1,0 +1,44 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>vue的列表渲染</title>
+	<script src="./vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<div v-for="(item,key,index) of userInfo">
+			{{item}}---{{key}}---{{index}}
+		</div>
+
+	</div>
+
+
+	<script>
+		//push pop shift unshift splice reverse sort
+		//vm.list.splice(1,1,{id:'1111',text:'qqqq'})
+		//动态给对象或者数组添加数据，不会立即在dom里显示，除非改变对象的引用，数据变化，页面也会变化
+		
+		//既是vue的全局方法，也是vue实例方法,数据发生变化，页面也会发生变化
+		var vm = new Vue({
+			el: "#app",
+			data: {
+				// Vue.set(vm.userInfo, "address", "beijing");
+				// vm.$set(vm.userInfo, "address", "beijing");
+				userInfo: {
+					name: 'mike',
+					age: 28,
+					gender: 'male',
+					salary: 'sacret'
+				},
+				// Vue.set(vm.list, 2, 10);
+				// vm.$set(vm.list, 1, 9);
+				list: [1, 2, 3, 4]
+			}
+		});
+
+
+
+	</script>
+</body>
+</html>
