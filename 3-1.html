@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>Document</title>
+	<script src="./vue.js"></script>
+</head>
+<body>
+	<div id="root">
+		<div @click="handleClick">
+			{{message}}
+		</div>
+	</div>
+	<item></item>
+	<script>
+		//每个组件也是vue的实例，vue的实例有很多属性和方法
+		Vue.component('item', {
+			template:"<div>hello component</div>"
+		});
+		
+		var vm = new Vue({
+			el:'#root',
+			data:{
+				message:"hello vue"
+			},
+			methods:{
+				handleClick:function(){
+					alert("hello click");
+				}
+			}
+		});
+
+		//实例属性
+		//vm.$data;
+		//实例属性
+		//vm.$el;
+		//实例方法，销毁vue的实例以后，双向绑定不同步了
+		//vm.$destory();
+	</script>
+</body>
+</html>

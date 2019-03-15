@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<link rel="stylesheet" href="">
+	<script src="https://cdn.jsdelivr.net/npm/vue/dist/vue.js"></script>
+	<title>Document</title>
+</head>
+<body>
+	
+	<!-- <div id="app">
+		{{message}}
+	</div> -->
+	
+   	<!-- <div id="app-2">
+	  <span v-bind:title="message">
+	    鼠标悬停几秒钟查看此处动态绑定的提示信息！
+	  </span>
+	</div> -->
+
+
+    <!--<div id="app-3">
+		<p v-if="seen">现在你看到我了</p>
+	</div> -->
+
+	<!-- <div id="app-4">
+		<ol>
+			<li v-for="todo in todos">
+				{{todo.text}}
+			</li>
+		</ol>
+	</div> -->
+
+	<!-- <div id="app-5">
+		<p>{{message}}</p>
+		<button v-on:click="reverseMessage">逆转消息</button>
+	</div> -->
+
+
+	<div id="app-6">
+		<p>{{message}}</p>
+		<input v-model="message">
+		<p v-html="name"></p>
+		<p>{{10+20}}</p>
+		<p>{{10>20?'大于':'小于'}}</p>
+
+		<p v-if="isShow">我是动态创建和删除</p>
+		<p v-show="isShow">我是动态隐藏和显示</p>
+
+		<button @click="handleClick">click</button>
+		<!-- <button v-on:click="handleClick">click</button> -->
+	
+		<p :class="isShow?'aaa':'bbb'"></p>
+		<!-- <p v-bind:class="isShow?'aaa':'bbb'"></p> -->
+	</div>
+
+<script>
+// var app = new Vue({
+// 	el: '#app',
+// 	data: {
+// 		message:"Hello Vue!!"
+// 	} 
+// });
+	// setTimeout(function(){
+	// 	app.$data.message = 'bye html';
+	// },2000);
+
+// var app2 = new Vue({
+// 	el:"#app-2",
+// 	data: {
+// 		message: '页面加载于 ' + new Date().toLocaleString()
+// 	}
+// });
+
+// app2.message = "I have change the data";
+
+// var app3 = new Vue({
+// 	el: "#app-3",
+// 	data: {
+// 		seen: true
+// 	}
+// });
+
+// app3.seen = false;
+
+// var app4 = new Vue({
+// 	el: "#app-4",
+// 	data: {
+// 		todos:[
+// 			{ text: '学习 JavaScript' },
+// 		    { text: '学习 Vue' },
+// 		    { text: '整个牛项目' }
+// 		]
+// 	}
+// });
+
+// app4.todos.push({text: '新项目'});
+	
+
+	// var app5 = new Vue({
+	// 	el: "#app-5",
+	// 	data: {
+	// 		message: "Hello Vue.js"
+	// 	},
+	// 	methods: {
+	// 		reverseMessage: function(){
+	// 			this.message = this.message.split('').reverse().join('')
+	// 		}
+	// 	}
+	// });
+
+	var app6 = new Vue({
+		el: "#app-6",
+		data:{
+			message: "Hello Vue.js",
+			name: "<b>xiaoming</b>",
+			isShow:false
+		},
+
+		methods:{
+			handleClick:function(){
+				this.name="aaaa";
+				this.isShow=true;
+			}
+		}
+	});
+</script>
+
+</body>
+</html>

@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>父子组件传值</title>
+	<script src="./vue.js"></script>
+</head>
+<body>
+	<!-- 父组件通过属性的形式向子组件传值 -->
+	<!-- 子组件通过事件触发的形式向父组件传值 -->
+	<!-- 父组件可以向子组件传递任何的数据，但是子组件不能修改父组件传递过来的数据，修改的话需要克隆出一个副本 -->
+
+
+	<div id="app">
+		<!-- :count="" 双引号内容是js表达式-->
+		<!-- count="" 双引号内容是字符串-->
+		<counter :count="2" @inc="handleIncrease"></counter>
+		<counter :count="3" @inc="handleIncrease"></counter>
+		<div>{{total}}</div>
+	</div>
+
+	<script>
+
+		var counter = {
+			//接受父组件传递的参数
+			props: ['count'],
+			template: "<div @click='handleClick'>{{number}}</div>",
+			data: function(){
+				return {
+					number: this.count
+				}
+			},
+			methods: {
+				handleClick: function(){
+					// alert(this.number);
+					this.number = this.number + 2;
+					this.$emit('inc', 2);
+				}
+			}
+
+		};
+		var vm = new Vue({
+			el: "#app",
+			data: {
+				total: 5
+			},
+			components: {
+				counter: counter
+			},
+			methods: {
+				handleIncrease: function(step){
+					this.total += step;
+				}
+			}
+
+		});
+	</script>
+</body>
+</html>

@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>计算属性get和set方法</title>
+	<script src="./vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		{{fullName}}
+		{{age}}
+	</div>
+
+	<script>
+		var vm = new Vue({
+			el: "#app",
+			data: {
+				firstName:'Jack',
+				lastName:'LI',
+				age: 28
+			},
+			//计算属性（当依赖的值发生变化的时候，就会重新计算，没有变化的时候，会调用上一次的缓存），当set设置fullName时，firstName和lastName发生变化，刚好是get方法所依赖的属性
+			computed:{
+					fullName:{
+						get:function(){
+							console.log('计算了一次');
+							return this.firstName + ' ' + this.lastName;
+						 },
+						set:function(value){
+							console.log(value);
+							var arr = value.split(' ');
+							this.firstName = arr[0];
+							this.lastName = arr[1];
+						}
+					}
+				}
+		});
+	</script>
+</body>
+</html>
