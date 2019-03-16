@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>非父子组件(Bus/总线/发布订阅模式/观察者模式)</title>
+	<script src="./vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<child content="Jack"></child>
+		<child content="Tom"></child>
+	</div>
+		
+
+	<script>
+		Vue.prototype.bus = new Vue();
+		Vue.component('child', {
+			data: function(){
+				return {
+					selfContent: this.content
+				}
+			},
+			template: '<div @click="handleDiv">{{selfContent}}</div>',
+			props:{
+				content: String
+			},
+			methods: {
+				handleDiv: function(){
+					alert(this.content);
+					this.bus.$emit('change', this.selfContent);
+				}
+			},
+
+			mounted: function(){
+				var this_ = this;
+				this.bus.$on('change', function(msg){
+					this_.selfContent = msg;
+				})
+			}
+
+
+
+		});
+
+		vm = new Vue({
+			el: '#app',
+
+		});
+	</script>
+</body>
+</html>
