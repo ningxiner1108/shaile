@@ -1,0 +1,37 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<title>动态组件与v-once指令</title>
+	<script src="./vue.js"></script>
+</head>
+<body>
+	<div id="app">
+		<!-- <component :is="type"></component> -->
+		<!-- 每一次切换的时候，都需要销毁创建组件，耗费内存。如果在组件上加v-once指令，直接保存在内存里面了，性能更高 -->
+		<child-one v-if="type === 'child-one'"></child-one>
+		<child-two v-if="type === 'child-two'"></child-two>
+		<button @click="changeBtnClick">change</button>
+	</div>
+	<script>
+		Vue.component('child-one', {
+			template: '<div >child-one</div>'
+		});
+
+		Vue.component('child-two', {
+			template: '<div>child-two</div>'
+		});
+		var vm = new Vue({
+			el: '#app',
+			data: {
+				type: 'child-one'
+			},
+			methods: {
+				changeBtnClick: function(){
+					 this.type = this.type === 'child-one' ? 'child-two' : 'child-one';
+				}
+			}
+		});
+	</script>
+</body>
+</html>
