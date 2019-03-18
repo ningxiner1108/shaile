@@ -5,22 +5,10 @@
 	<title>Vue中使用animate.css库</title>
 	<script src="./vue.js"></script>
 	<link rel="stylesheet" href="./animate.css">
-	<style>
-		.v-enter,
-		.v-leave-to{
-			opacity: 0;
-		}
-		.v-enter-active,
-		.v-leave-active{
-			transition: opacity 3s;
-		}
-
-	</style>
 </head>
 <body>
 	<div id="app">
-		<transition 
-				name="fade"
+		<transition
 				enter-active-class="animated swing"
 				leave-active-class="animated shake">
 			<div v-if="show">hello world</div>
