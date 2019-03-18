@@ -4,6 +4,7 @@
 	<meta charset="UTF-8">
 	<title>Vue中JS动画和velocity.js</title>
 	<script src="./vue.js"></script>
+	<script src="./velocity.js"></script>
 </head>
 <body>
 
@@ -28,20 +29,29 @@
 					this.show = !this.show;
 				},
 				handleBeforeEnter: function(el){
-					el.style.color = "red";
+					// el.style.color = "red";
+					el.style.opacity = 0;
 				},
 				handleEnter: function(el, done){
-					setTimeout(() => {
-						el.style.color="green"
-					}, 2000);
+					// setTimeout(() => {
+					// 	el.style.color="green"
+					// }, 2000),
 
 					// setTimeOut(() => {
 					// 	done();
-					// },4000);
+					// },4000)
+
+					Velocity(el, {
+						opacity: 1
+					},{
+						duration: 1000,
+						complete: done
+					});
 
 				},
 				handleAfterEnter: function(el){
-					el.style.color = "#000"
+					// el.style.color = "#000"
+					console.log('动画');
 				}
 			}
 
